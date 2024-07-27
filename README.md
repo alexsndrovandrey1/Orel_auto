@@ -111,7 +111,10 @@ trunc((current_date-born)/365) некорректно, так как оно не
 учитывает високосные года).
 
 ```(SQL)
-
+SELECT sname_initials, 
+       to_char(born,'dd.mm.yyyy') born, 
+       age(born)  
+FROM mechanic
 ```
 
 - Рассчитать отношение стоимости каждого автомобиля к его пробегу в
@@ -120,7 +123,8 @@ trunc((current_date-born)/365) некорректно, так как оно не
 пробегу> руб/км".
 
 ```(SQL)
-
+SELECT concat(gnz, ' - ', cost::money/run, 'руб/км')
+FROM vehicle;
 ```
 
 - Сформировать список автомобилей (государственный номерной знак) с
@@ -128,7 +132,8 @@ trunc((current_date-born)/365) некорректно, так как оно не
 прохождения обслуживания (таблица maintenance).
 
 ```(SQL)
-
+SELECT gnz, to_char(date_work, 'dd.mm.yyyy') "Дата", to_char(date_work, 'hh24:mi:ss') "Время"
+FROM maintenance
 ```
 
 - Сформировать ведомость амортизационной стоимости автомобилей,
